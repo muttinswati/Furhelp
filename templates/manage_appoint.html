@@ -1,0 +1,174 @@
+<!-- doctors view of appointment -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Furhelp Doctor Appointments</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" />
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #fef6ec;
+        }
+        /* Navbar style like Furhelp dashboard */
+        
+        nav {
+            background-color: #ae4102;
+        }
+        
+        .navbar-brand,
+        .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+        }
+        
+        .navbar .nav-link:hover {
+            color: #ffe8dc !important;
+        }
+        
+        .container {
+            min-height: 80vh;
+            margin-top: 30px;
+        }
+        
+        h2 {
+            color: #8c6741;
+            margin-bottom: 25px;
+        }
+        
+        .card {
+            background-color: #fff8f0;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+        
+        h5 {
+            color: #5c4033;
+        }
+        
+        .btn-action {
+            margin-right: 5px;
+            margin-top: 5px;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+        
+        .btn-accept {
+            background-color: #6a994e;
+            color: #fff;
+        }
+        
+        .btn-accept:hover {
+            background-color: #568a3f;
+        }
+        
+        .btn-reject {
+            background-color: #d95d39;
+            color: #fff;
+        }
+        
+        .btn-reject:hover {
+            background-color: #c14f2f;
+        }
+        
+        .btn-meet {
+            background-color: #8c6741;
+            color: #fff;
+        }
+        
+        .btn-meet:hover {
+            background-color: #715237;
+        }
+        
+        .btn-prescription {
+            background-color: #c49b54;
+            color: #fff;
+        }
+        
+        .btn-prescription:hover {
+            background-color: #a68140;
+        }
+        
+        input[type="text"] {
+            margin-top: 5px;
+            margin-right: 5px;
+            display: inline-block;
+            width: auto;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 5px 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-semibold" href="#">🐾 Furhelp Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Appointments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Appointments</h2>
+
+        {% if appointments %} {% for apt in appointments %}
+        <div class="card">
+            <h5>{{ apt[0] }} {{ apt[1] }} ({{ apt[2] }})</h5>
+            <p>
+                <strong>Date:</strong> {{ apt[4] }} |
+                <strong>Time:</strong> {{ apt[3] }}
+            </p>
+            <p><strong>Status:</strong> {{ apt[6] | capitalize }}</p>
+
+            <form method="POST" action="{{ url_for('manage_appointment') }}">
+                <input type="hidden" name="booking_id" value="{{ apt[7] }}" /> {% if apt[6]|lower == 'pending' %}
+                <button name="action" value="approve" class="btn btn-accept btn-action">Accept</button>
+                <button name="action" value="reject" class="btn btn-reject btn-action">Reject</button> {% endif %} {% if not apt[5] %}
+                <input type="text" name="meetlink" placeholder="Add Meet Link" />
+                <button name="action" value="meetlink" class="btn btn-meet btn-action">Save Link</button> {% else %}
+                <p>
+                    <strong>Meet Link:</strong>
+                    <a href="{{ apt[5] }}" target="_blank">{{ apt[5] }}</a>
+                </p>
+                {% endif %}
+
+                <button name="action" value="prescription" class="btn btn-prescription btn-action">Add Prescription</button>
+            </form>
+        </div>
+        {% endfor %} {% else %}
+        <p>No appointments yet.</p>
+        {% endif %}
+    </div>
+
+    <footer class="text-center py-3" style="background-color: #ae4102; color: #fff;">
+        © 2025 Furhelp. All rights reserved.
+    </footer>
+
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+
+</html>
+<script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+
+</html>

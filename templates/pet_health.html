@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Health Analyzer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fef6ec;
+        }
+        
+        nav {
+            background-color: #ae4102;
+        }
+        
+        .navbar .nav-link,
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 500;
+        }
+        
+        .navbar .nav-link:hover {
+            color: #ffe8dc !important;
+        }
+        
+        .container {
+            min-height: 80vh;
+        }
+        
+        footer {
+            background-color: #ae4102;
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            margin-top: 30px;
+        }
+        
+        h2 {
+            color: #ae4102;
+            font-weight: 600;
+        }
+        
+        ul li {
+            font-size: 1.05rem;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-semibold" href="#">🐾 FurHelp</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/pet-health">Health Analysis</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 mb-5">
+        <h2 class="mb-4">Pet Health Analyzer</h2>
+
+        <form method="POST" class="mb-5">
+            <div class="mb-3">
+                <label class="form-label">Pet Name</label>
+                <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Weight (kg)</label>
+                <input type="number" step="0.1" name="weight" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Height (m)</label>
+                <input type="number" step="0.01" name="height" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Water Intake (ml/day)</label>
+                <input type="number" name="water" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Activity (hours/day)</label>
+                <input type="number" step="0.1" name="activity" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Analyze</button>
+            <a href="{{ url_for('dashboard') }}" class="back-btn">← Back to Dashboard</a>
+        </form>
+
+        {% if result %}
+        <h4>Health Summary for {{ result.name }}</h4>
+        <ul>
+            <li>BMI: {{ result.bmi }} ({{ result.bmi_cat }})</li>
+            <li>Hydration Score: {{ result.hydration }}%</li>
+            <li>Activity Score: {{ result.activity }}%</li>
+            <li>Overall Health Score: {{ result.overall }}/100</li>
+        </ul>
+
+        <div class="row mt-4">
+            <div class="col-md-6 mb-4">
+                <canvas id="bmiPieChart"></canvas>
+            </div>
+            <div class="col-md-6 mb-4">
+                <canvas id="healthBarChart"></canvas>
+            </div>
+        </div>
+
+        <script>
+            const bmiCat = "{{ result.bmi_cat }}";
+            const bmiValue = parseFloat("{{ result.bmi }}");
+            const hydration = parseFloat("{{ result.hydration }}");
+            const activity = parseFloat("{{ result.activity }}");
+
+            // BMI Pie Chart
+            const bmiData = [0, 0, 0, 0];
+            const labels = ['Underweight', 'Healthy', 'Overweight', 'Obese'];
+            const index = labels.indexOf(bmiCat);
+            if (index !== -1) bmiData[index] = 100;
+
+            new Chart(document.getElementById('bmiPieChart'), {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'BMI Category',
+                        data: bmiData,
+                        backgroundColor: ['#f39c12', '#27ae60', '#f1c40f', '#e74c3c']
+                    }]
+                }
+            });
+
+            // Bar Chart for Health Scores
+            new Chart(document.getElementById('healthBarChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['BMI', 'Hydration', 'Activity'],
+                    datasets: [{
+                        label: 'Score',
+                        data: [bmiValue, hydration, activity],
+                        backgroundColor: ['#27ae60', '#3498db', '#f1c40f']
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        </script>
+
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>© 2025 FurHelp. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

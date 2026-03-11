@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Prescription | FurHelp</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <style>
+        body {
+            background-color: #fef6ec;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        nav {
+            background-color: #ae4102;
+        }
+        
+        .navbar-brand,
+        .nav-link {
+            color: #fff !important;
+        }
+        
+        .container {
+            max-width: 700px;
+            background-color: #fff;
+            margin-top: 40px;
+            border-radius: 15px;
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #ae4102;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        label {
+            font-weight: 500;
+            color: #5c3b1e;
+        }
+        
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #d3a57f;
+        }
+        
+        button {
+            background-color: #ae4102;
+            color: #fff;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #8b3000;
+        }
+        
+        .back-btn {
+            background-color: #8b3000;
+            text-decoration: none;
+            color: white;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-weight: 500;
+        }
+        
+        .back-btn:hover {
+            background-color: #5c2500;
+        }
+        
+        footer {
+            background-color: #ae4102;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 40px;
+        }
+        
+        .paw {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .paw img {
+            width: 60px;
+            height: 60px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand fw-semibold" href="{{ url_for('dashboard') }}">🐾 FurHelp</a>
+            <a href="{{ url_for('doc_dashboard') }}" class="back-btn">← Back to Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="paw">
+            <img src="{{ url_for('static', filename='images/paw.png') }}" alt="Paw Icon">
+        </div>
+        <h2>Add Prescription</h2>
+
+        <form method="POST">
+            <input type="hidden" name="booking_id" value="{{ booking_id }}">
+
+            <div class="mb-3">
+                <label for="symptoms">Symptoms</label>
+                <textarea name="symptoms" id="symptoms" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="medicines">Medicines Prescribed</label>
+                <textarea name="medicines" id="medicines" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="next_visit">Next Visit Date</label>
+                <input type="date" name="next_visit" id="next_visit" class="form-control">
+            </div>
+
+            <div class="text-center">
+                <button type="submit">Save Prescription</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <p>© 2025 FurHelp. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>

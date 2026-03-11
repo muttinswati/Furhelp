@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescriptions | FurHelp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fef6ec;
+        }
+        
+        nav {
+            background-color: #ae4102;
+        }
+        
+        .navbar .nav-link,
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 500;
+        }
+        
+        .navbar .nav-link:hover {
+            color: #ffe8dc !important;
+        }
+        
+        .container {
+            margin-top: 40px;
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #ae4102;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        table th,
+        table td {
+            border: 1px solid #d3a57f;
+            padding: 6px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table th {
+            background-color: #ae4102;
+            color: white;
+        }
+        
+        footer {
+            background-color: #ae4102;
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            margin-top: 40px;
+        }
+        
+        .back-btn {
+            background-color: #8b3000;
+            text-decoration: none;
+            color: white;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-weight: 500;
+            margin-right: 10px;
+        }
+        
+        .back-btn:hover {
+            background-color: #5c2500;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand fw-semibold" href="{{ url_for('doc_dashboard') if is_doctor else url_for('dashboard') }}">🐾 FurHelp</a>
+            <div>
+                <a href="{{ url_for('doc_dashboard') if is_doctor else url_for('dashboard') }}" class="back-btn">← Back to Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Prescriptions</h2>
+        {% if prescriptions %}
+        <table>
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Doctor Name</th>
+                    <th>Doctor Phone</th>
+                    <th>Symptoms</th>
+                    <th>Medicine</th>
+                    <th>Dosage</th>
+                    <th>Days</th>
+                    <th>Time</th>
+                    <th>Instruction</th>
+                    <th>Next Visit</th>
+                    <th>Uploaded On</th>
+                    <th>Booking ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in prescriptions %} {% set meds = p.structured_meds if p.structured_meds else [{'name':'-','dosage':'-','days':'-','time':'-','instruction':'-'}] %} {% for med in meds %}
+                <tr>
+                    {% if loop.first %}
+                    <td rowspan="{{ meds|length }}">{{ p.user_name }}</td>
+                    <td rowspan="{{ meds|length }}">{{ p.doctor_name }}</td>
+                    <td rowspan="{{ meds|length }}">{{ p.doctor_phone }}</td>
+                    <td rowspan="{{ meds|length }}">{{ p.symptoms }}</td>
+                    {% endif %}
+                    <td>{{ med.name }}</td>
+                    <td>{{ med.dosage }}</td>
+                    <td>{{ med.days }}</td>
+                    <td>{{ med.time }}</td>
+                    <td>{{ med.instruction }}</td>
+                    {% if loop.first %}
+                    <td rowspan="{{ meds|length }}">{{ p.next_visit or '-' }}</td>
+                    <td rowspan="{{ meds|length }}">{{ p.uploaded_on.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td rowspan="{{ meds|length }}">{{ p.bid }}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %} {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p style="text-align:center;">No prescriptions found.</p>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>© 2025 FurHelp. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+
+</html>

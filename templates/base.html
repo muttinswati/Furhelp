@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Consultation Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <style>
+        body {
+            background-color: #fef6ec;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        nav {
+            background-color: #ae4102;
+        }
+        
+        .navbar .nav-link,
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 500;
+        }
+        
+        .navbar .nav-link:hover {
+            color: #ffe8dc !important;
+        }
+        
+        footer {
+            background-color: #ae4102;
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            margin-top: auto;
+        }
+        
+        .loading-box {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 480px;
+            text-align: center;
+            padding: 40px 30px;
+            margin: 80px auto;
+            /* push it below header */
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            font-size: 26px;
+            color: #444;
+            font-weight: 600;
+        }
+        
+        .paw {
+            font-size: 50px;
+            color: #f6a623;
+            animation: bounce 1s infinite alternate;
+            display: block;
+            margin: 20px auto 10px auto;
+        }
+        
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-15px);
+            }
+        }
+        
+        .loading-text {
+            margin-top: 20px;
+            font-weight: 500;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar / Header -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-semibold" href="{{ url_for('dashboard') }}">🐾 FurHelp Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="loading-box">
+        <h1>Pet Consultation Portal</h1>
+        <div class="paw">🐾</div>
+        <div class="loading-text">Please wait while we load your dashboard...</div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 FurHelp. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Redirect after 2 seconds
+        setTimeout(() => {
+            window.location.href = "{{ redirect_url }}";
+        }, 2000);
+    </script>
+</body>
+
+</html>

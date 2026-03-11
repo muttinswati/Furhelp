@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Canine Parvovirus | FurHelp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+</head>
+
+<body style="background-color:#fff9f4;">
+    <div class="container mt-5 p-4 bg-white rounded shadow">
+        <h2 class="text-danger fw-semibold">Canine Parvovirus 💩</h2>
+        <p><strong>Cause:</strong> A highly contagious viral disease that attacks a dog’s intestines and immune system.</p>
+
+        <h5>⚠️ Symptoms:</h5>
+        <ul>
+            <li>Severe vomiting and bloody diarrhea</li>
+            <li>Rapid dehydration</li>
+            <li>Foul smell from stool</li>
+            <li>Extreme weakness</li>
+        </ul>
+
+        <h5>🚨 Warning:</h5>
+        <p>Parvo kills puppies in <strong>2–3 days</strong> if untreated. Immediate vet care and IV fluids are life-saving.</p>
+
+        <h5>💡 Prevention:</h5>
+        <ul>
+            <li>Vaccinate your dog on time (core vaccine)</li>
+            <li>Keep unvaccinated pups away from stray dogs</li>
+        </ul>
+
+        <p class="text-muted">Learn more: <a href="https://www.avma.org/resources-tools/pet-owners/petcare/canine-parvovirus" target="_blank">AVMA: Canine Parvovirus</a></p>
+        <a href="{{ url_for('homepage') }}" class="btn btn-primary mt-3">← Back to Home</a>
+    </div>
+</body>
+
+</html>

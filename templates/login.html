@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FurHelp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.8-dist/css/bootstrap.min.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff8f3;
+            margin: 0;
+            padding: 0;
+            color: #3a2f1b;
+        }
+        
+        header,
+        footer {
+            background-color: #ae4102;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        header h1 {
+            margin: 5px 0;
+            font-size: 2.5em;
+        }
+        
+        .a1 {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 50px;
+            flex-wrap: wrap;
+            padding: 30px 20px;
+        }
+        /* Slider styles - updated to match first login page */
+        
+        .slider-wrapper {
+            overflow: hidden;
+            width: 400px;
+            height: 300px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .slider {
+            display: flex;
+            width: calc(400px * 10);
+            animation: slide 25s linear infinite;
+        }
+        
+        .slider img {
+            width: 400px;
+            height: 300px;
+            object-fit: cover;
+            margin-right: 10px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+        
+        .slider img:hover {
+            transform: scale(1.05);
+        }
+        
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .quotes {
+            text-align: center;
+            margin-top: 15px;
+            font-style: italic;
+            color: #6b4f37;
+            font-size: 1.1em;
+        }
+        
+        .login {
+            background: white;
+            padding: 35px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            width: 360px;
+        }
+        
+        .login h2 {
+            color: #ae4102;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .login input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .btn-primary {
+            background-color: #ae4102;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #922f00;
+        }
+        
+        .toggle-link {
+            display: block;
+            text-align: center;
+            margin-top: 12px;
+            color: #ae4102;
+            text-decoration: none;
+        }
+        
+        .toggle-link:hover {
+            text-decoration: underline;
+        }
+        
+        .error-msg {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        footer p {
+            margin: 0;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="FurHelp Logo" style="height: 80px; margin-bottom: 10px;">
+        <h1>Welcome to FurHelp</h1>
+    </header>
+
+    <div class="a1">
+        <div>
+            <div class="slider-wrapper">
+                <div class="slider">
+                    <img src="{{ url_for('static', filename='images/pets2.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/o1.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/pets.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/o3.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/p2.jpg') }}" alt="Pet Image">
+                    <!-- Repeat for smooth loop -->
+                    <img src="{{ url_for('static', filename='images/pets2.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/o1.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/pets.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/o3.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/p2.jpg') }}" alt="Pet Image">
+                </div>
+            </div>
+            <div class="quotes">
+                "A home is not complete without a wagging tail." <br> "Every paw deserves love and care." <br> "Compassion for animals reflects the heart of humanity." <br>
+            </div>
+        </div>
+
+        <div class="login">
+            {% if error %}
+            <div class="error-msg">{{ error }}</div>
+            {% endif %}
+            <form action="{{ url_for('login_route') }}" method="POST">
+                <h2>Welcome Back!</h2>
+                <input type="email" name="email" placeholder="Enter Email" required>
+                <input type="password" name="password" placeholder="Enter Password" required>
+                <button type="submit" class="btn btn-primary mt-2">Login</button>
+                <a class="toggle-link" href="{{ url_for('sign_route') }}">Don't have an account? Sign Up</a>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 FurHelp. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>

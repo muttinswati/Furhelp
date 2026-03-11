@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - FurHelp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.8-dist/css/bootstrap.min.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff8f3;
+            margin: 0;
+            padding: 0;
+            color: #3a2f1b;
+        }
+        
+        header,
+        footer {
+            background-color: #ae4102;
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+        }
+        
+        header h1 {
+            margin: 5px 0;
+            font-size: 2.2em;
+        }
+        
+        .a1 {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 30px 20px;
+        }
+        /* Slider styles */
+        
+        .slider-wrapper {
+            overflow: hidden;
+            width: 400px;
+            height: 300px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .slider {
+            display: flex;
+            width: calc(400px * 10);
+            animation: slide 25s linear infinite;
+        }
+        
+        .slider img {
+            width: 400px;
+            height: 300px;
+            object-fit: cover;
+            margin-right: 10px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+        
+        .slider img:hover {
+            transform: scale(1.05);
+        }
+        
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .login {
+            background: white;
+            padding: 35px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            width: 360px;
+        }
+        
+        .login h2 {
+            color: #ae4102;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .login label {
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        .login input {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .btn-primary {
+            background-color: #ae4102;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #922f00;
+        }
+        
+        .toggle-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #ae4102;
+            text-decoration: none;
+        }
+        
+        .toggle-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="FurHelp Logo" style="height: 80px; margin-bottom: 10px;" />
+        <h1>Welcome to FurHelp</h1>
+    </header>
+
+    <div class="a1">
+        <div>
+            <div class="slider-wrapper">
+                <div class="slider">
+                    <img src="{{ url_for('static', filename='images/o1.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/o.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/pets.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/o3.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/p2.jpg') }}" alt="Pet Image">
+                    <!-- Repeat for smooth loop -->
+                    <img src="{{ url_for('static', filename='images/o1.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/o.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/pets.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/o3.jpg') }}" alt="Pet Image">
+                    <img src="{{ url_for('static', filename='images/p2.jpg') }}" alt="Pet Image">
+                </div>
+            </div>
+        </div>
+
+        <div class="login">
+            <form action="{{ url_for('sign_route') }}" method="POST">
+                <h2>Create Account</h2>
+
+                <label>First Name</label>
+                <input type="text" name="fname" placeholder="First Name" required>
+                <label>Last Name</label>
+                <input type="text" name="lname" placeholder="Last Name" required>
+                <label>Email</label>
+                <input type="email" name="email" placeholder="Email" required>
+                <label>Mobile No.</label>
+                <input type="text" name="phnor" placeholder="Mobile number" required>
+                <label>City</label>
+                <input type="text" name="city" placeholder="City" required>
+                <label>Create Password</label>
+                <input type="password" name="password" placeholder="Password" required>
+
+                <button type="submit" class="btn btn-primary mt-2">Sign Up</button>
+
+                <a class="toggle-link" href="{{ url_for('login_route') }}">Already have an account? Login</a>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 FurHelp. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

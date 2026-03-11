@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Settings - FurHelp</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <style>
+        body.light-mode {
+            background: #fff;
+            color: #333;
+        }
+        
+        body.dark-mode {
+            background: #1c1c1c;
+            color: #f5f5f5;
+        }
+        
+        .setting-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        body.dark-mode .setting-card {
+            background: #2b2b2b;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="{{ theme }}">
+
+    {% include 'navbar.html' %}
+
+    <div class="container mt-5">
+        <h2>Settings</h2>
+
+        <div class="setting-card mt-4 shadow">
+            <h5>Theme</h5>
+            <form action="/toggle-theme" method="POST">
+                <button class="btn btn-primary mt-2">Toggle Light / Dark Mode</button>
+            </form>
+        </div>
+
+        <div class="setting-card mt-4 shadow">
+            <h5>Account</h5>
+            <a href="/logout" class="btn btn-danger mt-2">Logout</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

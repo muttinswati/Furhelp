@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Dashboard</title>
+
+    <!-- Local Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fef6ec;
+        }
+
+        nav {
+            background-color: #ae4102;
+        }
+
+        .navbar .nav-link,
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 500;
+        }
+
+        .navbar .nav-link:hover {
+            color: #ffe8dc !important;
+        }
+
+        .container-main {
+            width: 100%;
+            min-height: 600px;
+            padding: 30px;
+        }
+
+        .box,
+        .mbox {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .box1,
+        .box2,
+        .box3,
+        .box4 {
+            width: 300px;
+            height: 250px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            padding-top: 15px;
+            cursor: pointer;
+        }
+
+        .box1:hover,
+        .box2:hover,
+        .box3:hover,
+        .box4:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        img {
+            width: 70%;
+            height: 150px;
+            object-fit: contain;
+            margin-top: 10px;
+        }
+
+        h4 {
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        hr {
+            width: 80%;
+            margin: 10px auto;
+            border-top: 2px solid #ae4102;
+        }
+
+        footer {
+            background-color: #ae4102;
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-main">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-semibold" href="#">🐾 Furhelp Dashboard</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Appointments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Settings</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="box mt-4">
+            <div class="box1" onclick="window.location.href='{{ url_for('manage_appointment') }}'">
+                <h4>VIEW AND MANAGE APPOINTMENTS</h4>
+                <hr />
+                <img src="{{ url_for('static', filename='images/ba.png') }}" alt="Appointments">
+            </div>
+
+            <div class="box2" onclick="window.location.href='{{ url_for('view_prescriptions') }}'">
+                <h4>PRESCRIPTIONS</h4>
+                <hr />
+                <img src="{{ url_for('static', filename='images/p.png') }}" alt="Prescriptions">
+            </div>
+        </div>
+
+        <div class="mbox mt-4">
+            <div class="box3">
+                <h4>Coming soon....</h4>
+                <hr />
+                <img src="{{ url_for('static', filename='images/v.png') }}" alt="Coming Soon">
+            </div>
+            <div class="box4">
+                <h4>Coming soon....</h4>
+                <hr />
+                <img src="{{ url_for('static', filename='images/ha.png') }}" alt="Coming Soon">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Furhelp. All rights reserved.</p>
+    </footer>
+
+    <!-- Local Bootstrap JS -->
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+
+</html>

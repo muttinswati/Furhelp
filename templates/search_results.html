@@ -1,0 +1,280 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors in {{ city }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fef6ec;
+        }
+        
+        nav {
+            background-color: #ae4102;
+        }
+        
+        .navbar .nav-link,
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 500;
+        }
+        
+        .navbar .nav-link:hover {
+            color: #ffe8dc !important;
+        }
+        
+        .navbar .btn-outline-success {
+            color: #fff;
+            border-color: #fff;
+        }
+        
+        .navbar .btn-outline-success:hover {
+            background-color: #54b435;
+            border-color: #54b435;
+        }
+        
+        .container-main {
+            width: 100%;
+            min-height: 600px;
+            padding: 30px;
+        }
+        
+        .doctors-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .doctor-card {
+            background-color: #fff;
+            width: 280px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+        
+        .doctor-card h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .doctor-card p {
+            margin: 5px 0;
+            color: #555;
+        }
+        
+        .btn-book {
+            background-color: #ae4102;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .btn-book:hover {
+            background-color: #ff7b54;
+        }
+        
+        footer {
+            background-color: #ae4102;
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    Navbar same as dashboard -->
+<!-- <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-semibold" href="#">🐾 FurHelp Dashboard</a>
+    </div>
+</nav>
+
+<div class="container-main">
+    <h2 class="text-center mb-4">Doctors in {{ city }}</h2>
+
+    <div class="doctors-box">
+        {% for doc in results %}
+        <div class="doctor-card">
+            <h4>{{ doc[0] }} {{ doc[1] }}</h4>
+            <p>📍 {{ doc[2] }}</p>
+            <p>🏠 {{ doc[3] }}</p>
+            <p>📞 {{ doc[4] }}</p>
+            <form action="{{ url_for('book_appointment') }}" method="POST">
+                <input type="hidden" name="doc_name" value="{{ doc[0] }} {{ doc[1] }}">
+                <input type="hidden" name="doc_city" value="{{ doc[2] }}">
+                <input type="hidden" name="doc_address" value="{{ doc[3] }}">
+                <input type="hidden" name="doc_phone" value="{{ doc[4] }}">
+                <input type="hidden" name="doc_id" value="{{ doc[5] }}">
+                <form action="{{ url_for('book_appointment') }}" method="POST">
+                    <input type="hidden" name="doc_id" value="{{ doc[5] }}">
+                    <button type="submit" class="btn btn-success">Book Appointment</button>
+                </form>
+
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 FurHelp. All rights reserved.</p>
+</footer>
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors in {{ city }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fef6ec;
+        }
+        
+        nav {
+            background-color: #ae4102;
+        }
+        
+        .navbar .nav-link,
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 500;
+        }
+        
+        .navbar .nav-link:hover {
+            color: #ffe8dc !important;
+        }
+        
+        .navbar .btn-outline-success {
+            color: #fff;
+            border-color: #fff;
+        }
+        
+        .navbar .btn-outline-success:hover {
+            background-color: #54b435;
+            border-color: #54b435;
+        }
+        
+        .container-main {
+            width: 100%;
+            min-height: 600px;
+            padding: 30px;
+        }
+        
+        .doctors-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .doctor-card {
+            background-color: #fff;
+            width: 280px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+        
+        .doctor-card h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .doctor-card p {
+            margin: 5px 0;
+            color: #555;
+        }
+        
+        .btn-book {
+            background-color: #ae4102;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .btn-book:hover {
+            background-color: #ff7b54;
+        }
+        
+        footer {
+            background-color: #ae4102;
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-semibold" href="#">🐾 FurHelp Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="container-main">
+        <h2 class="text-center mb-4">Doctors in {{ city }}</h2>
+
+        <div class="doctors-box">
+            {% for doc in results %}
+            <div class="doctor-card">
+                <h4>{{ doc[0] }} {{ doc[1] }}</h4>
+                <p>📍 {{ doc[2] }}</p>
+                <p>🏠 {{ doc[3] }}</p>
+                <p>📞 {{ doc[4] }}</p>
+
+                <!-- Single form per doctor card -->
+                <form action="{{ url_for('book_appointment') }}" method="POST">
+                    <input type="hidden" name="doc_id" value="{{ doc[5] }}">
+                    <input type="hidden" name="doc_name" value="{{ doc[0] }} {{ doc[1] }}">
+                    <input type="hidden" name="doc_city" value="{{ doc[2] }}">
+                    <input type="hidden" name="doc_address" value="{{ doc[3] }}">
+                    <input type="hidden" name="doc_phone" value="{{ doc[4] }}">
+                    <button type="submit" class="btn btn-success btn-book">Book Appointment</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 FurHelp. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

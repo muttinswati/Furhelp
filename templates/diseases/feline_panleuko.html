@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Feline Panleukopenia | FurHelp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+</head>
+
+<body style="background-color:#fff9f4;">
+    <div class="container mt-5 p-4 bg-white rounded shadow">
+        <h2 class="text-danger fw-semibold">Feline Panleukopenia (Cat Distemper) 🐱</h2>
+        <p><strong>Cause:</strong> A severe viral infection in cats that destroys white blood cells and weakens immunity.</p>
+
+        <h5>⚠️ Symptoms:</h5>
+        <ul>
+            <li>High fever, vomiting, and diarrhea</li>
+            <li>Loss of appetite and dehydration</li>
+            <li>Sudden collapse in kittens</li>
+        </ul>
+
+        <h5>🩺 When to see vet:</h5>
+        <p>Don’t wait — dehydration can kill fast. Needs IV fluids, antibiotics, and supportive care.</p>
+
+        <h5>💡 Prevention:</h5>
+        <ul>
+            <li>Keep cat vaccinations up to date</li>
+            <li>Disinfect litter boxes regularly</li>
+        </ul>
+
+        <p class="text-muted">Learn more: <a href="https://www.petmd.com/cat/conditions/infectious-parasitic/c_ct_feline_panleukopenia" target="_blank">PetMD: Feline Panleukopenia</a></p>
+        <a href="{{ url_for('homepage') }}" class="btn btn-primary mt-3">← Back to Home</a>
+    </div>
+</body>
+
+</html>

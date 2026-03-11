@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Appointment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff9f3;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav {
+            background-color: #ae4102;
+        }
+        
+        .navbar .nav-link,
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 500;
+        }
+        
+        .navbar .nav-link:hover {
+            color: #ffe8dc !important;
+        }
+        
+        .container {
+            max-width: 480px;
+            margin: 70px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 16px rgba(174, 65, 2, 0.15);
+            transition: 0.3s ease;
+        }
+        
+        .container:hover {
+            box-shadow: 0 10px 20px rgba(174, 65, 2, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        h3 {
+            color: #ae4102;
+            font-weight: 600;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        label {
+            font-weight: 500;
+            color: #444;
+        }
+        
+        input,
+        select {
+            border: 2px solid #f3c9a1;
+            border-radius: 8px;
+            padding: 10px;
+            transition: 0.2s;
+        }
+        
+        input:focus,
+        select:focus {
+            border-color: #ae4102;
+            box-shadow: 0 0 4px rgba(174, 65, 2, 0.3);
+            outline: none;
+        }
+        
+        button {
+            background-color: #54b435;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            width: 100%;
+            font-weight: 600;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #3d8e29;
+            transform: scale(1.02);
+        }
+        
+        footer {
+            background-color: #ae4102;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-semibold" href="#">🐾 FurHelp Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h3>Select Appointment</h3>
+
+        <form action="{{ url_for('confirm_booking') }}" method="POST">
+            <!-- Hidden field for doc_id -->
+            <input type="hidden" name="doc_id" value="{{ doc_id }}">
+
+            <!-- Select date -->
+            <div class="mb-3">
+                <label for="appt_date">Choose Date:</label>
+                <input type="date" id="appt_date" name="appt_date" class="form-control" required>
+            </div>
+
+            <!-- Select 1-hour time slots -->
+            <div class="mb-3">
+                <label for="appt_time">Choose Time Slot:</label>
+                <select id="appt_time" name="appt_time" class="form-control" required>
+          <!-- Morning session -->
+          <option value="10:00">10:00 - 11:00</option>
+          <option value="11:00">11:00 - 12:00</option>
+          <option value="12:00">12:00 - 13:00</option>
+          <option value="13:00">13:00 - 14:00</option>
+          <option value="14:00">14:00 - 15:00</option>
+
+          <!-- Evening session -->
+          <option value="18:00">18:00 - 19:00</option>
+          <option value="19:00">19:00 - 20:00</option>
+          <option value="20:00">20:00 - 21:00</option>
+          <option value="21:00">21:00 - 22:00</option>
+        </select>
+            </div>
+
+            <button type="submit">Confirm Appointment</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>© 2025 FurHelp. All rights reserved.</p>
+    </footer>
+
+    <!-- JS to restrict date/time -->
+    <script>
+        const dateInput = document.getElementById('appt_date');
+        const timeSelect = document.getElementById('appt_time');
+        const today = new Date();
+        const todayStr = today.toISOString().split('T')[0];
+
+        // Set min date to today
+        dateInput.setAttribute('min', todayStr);
+
+        // Auto-disable past time slots for today's date
+        dateInput.addEventListener('change', function() {
+            const selectedDate = new Date(this.value);
+            const isToday = selectedDate.toDateString() === today.toDateString();
+
+            for (let option of timeSelect.options) {
+                const [hour] = option.value.split(':');
+                if (isToday && parseInt(hour) <= today.getHours()) {
+                    option.disabled = true;
+                    option.style.color = "#aaa";
+                } else {
+                    option.disabled = false;
+                    option.style.color = "#000";
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

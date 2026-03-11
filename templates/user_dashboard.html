@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard | FurHelp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fef6ec;
+            margin: 0;
+        }
+        
+        nav {
+            background-color: #ae4102;
+        }
+        
+        .navbar .nav-link,
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 500;
+        }
+        
+        .navbar .nav-link:hover {
+            color: #ffe8dc !important;
+        }
+        
+        .navbar .btn-outline-success {
+            color: #fff;
+            border-color: #fff;
+        }
+        
+        .navbar .btn-outline-success:hover {
+            background-color: #54b435;
+            border-color: #54b435;
+        }
+        
+        .dashboard-container {
+            width: 100%;
+            min-height: 600px;
+            padding: 30px;
+        }
+        
+        .box,
+        .mbox {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .card-box {
+            width: 320px;
+            height: 270px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            padding-top: 20px;
+            cursor: pointer;
+        }
+        
+        .card-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-box img {
+            width: 70%;
+            height: 160px;
+            object-fit: contain;
+            margin-top: 10px;
+        }
+        
+        .card-box h4 {
+            color: #333;
+            font-size: 1.1rem;
+        }
+        
+        .card-box hr {
+            width: 80%;
+            margin: 10px auto;
+            border-top: 2px solid #ff7b54;
+        }
+        
+        .city-search {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .city-search input {
+            flex: 1;
+        }
+        
+        footer {
+            background-color: #ae4102;
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-semibold" href="#">🐾 FurHelp Dashboard</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Appointments</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('settings') }}">Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- City Search -->
+        <div class="city-search">
+            <input type="text" id="locationInput" class="form-control" placeholder="Enter city...">
+            <button class="btn btn-outline-success" onclick="submitLocation()">Search</button>
+        </div>
+
+        <!-- Dashboard Boxes -->
+        <div class="box mt-4">
+            <div class="card-box" onclick="window.location.href='/view_appointment'">
+                <h4>VIEW APPOINTMENTS</h4>
+                <hr />
+                <img src="{{ url_for('static', filename='images/ba.png') }}">
+            </div>
+
+            <div class="card-box" onclick="window.location.href='/user_prescriptions'">
+                <h4>PRESCRIPTIONS</h4>
+                <hr />
+                <img src="{{ url_for('static', filename='images/p.png') }}">
+            </div>
+
+            <div class="card-box" onclick="window.location.href='/pet-health'">
+                <h4>HEALTH ANALYSIS</h4>
+                <hr />
+                <img src="{{ url_for('static', filename='images/ha.png') }}">
+            </div>
+        </div>
+
+        <div class="mbox mt-4">
+            <div class="card-box">
+                <h4>COMING SOON...</h4>
+                <hr />
+                <img src="{{ url_for('static', filename='images/v.png') }}">
+            </div>
+            <div class="card-box">
+                <h4>COMING SOON...</h4>
+                <hr />
+                <img src="{{ url_for('static', filename='images/t.png') }}">
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 FurHelp. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script>
+        function submitLocation() {
+            const selectedLocation = document.getElementById("locationInput").value.trim();
+            if (!selectedLocation) {
+                alert("Please enter a city!");
+                return;
+            }
+
+            const form = document.createElement("form");
+            form.method = "POST";
+            form.action = "/search_results";
+
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.name = "locationInput";
+            input.value = selectedLocation;
+
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</body>
+
+</html>

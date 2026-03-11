@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Canine Distemper | FurHelp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+</head>
+
+<body style="background-color:#fff9f4;">
+    <div class="container mt-5 p-4 bg-white rounded shadow">
+        <h2 class="text-primary fw-semibold">Canine Distemper 🤧</h2>
+        <p><strong>Cause:</strong> A contagious viral disease affecting a dog’s respiratory, digestive, and nervous systems.</p>
+
+        <h5>⚠️ Symptoms:</h5>
+        <ul>
+            <li>Coughing and nasal discharge</li>
+            <li>Loss of appetite and fever</li>
+            <li>Eye discharge and seizures</li>
+            <li>Paw pad thickening (hard pad disease)</li>
+        </ul>
+
+        <h5>🩺 Important:</h5>
+        <p>No home treatment. Needs immediate vet attention — untreated, it causes <strong>neurological damage or death</strong>.</p>
+
+        <h5>💡 Prevention:</h5>
+        <ul>
+            <li>Regular vaccination is key</li>
+            <li>Keep infected dogs isolated</li>
+        </ul>
+
+        <p class="text-muted">Learn more: <a href="https://www.avma.org/resources-tools/pet-owners/petcare/canine-distemper" target="_blank">AVMA</a>
+        </p>
+        <a href="{{ url_for('homepage') }}" class="btn btn-primary mt-3">← Back to Home</a>
+    </div>
+</body>
+
+</html>

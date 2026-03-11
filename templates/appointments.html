@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Your Appointments - FurHelp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fef6ec;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+        
+        h3 {
+            text-align: center;
+            color: #ae4102;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card h5 {
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .card p {
+            margin-bottom: 6px;
+            color: #555;
+        }
+        
+        .card a {
+            color: #54b435;
+            text-decoration: none;
+        }
+        
+        .card a:hover {
+            text-decoration: underline;
+        }
+        
+        .btn-back {
+            background-color: #ae4102;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+        
+        .btn-back:hover {
+            background-color: #85400d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>Your Appointments</h3>
+        <div class="row">
+            {% for app in appointments %}
+            <div class="col-md-6 mb-4">
+                <div class="card p-3" onclick="window.location.href='/view_appointment?doc_id={{ app.did }}&date={{ app.date }}&time={{ app.time }}'">
+                    <h5>Dr. {{ app.fname }} {{ app.lname }}</h5>
+                    <p><strong>Date:</strong> {{ app.date }} | <strong>Time:</strong> {{ app.time }}</p>
+                    <p><strong>Status:</strong> {{ app.status|capitalize }}</p>
+                    {% if app.meeting_link %}
+                    <p><strong>Meeting Link:</strong> <a href="{{ app.meeting_link }}" target="_blank">Join</a></p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('dashboard') }}">
+                <button class="btn-back">Back to Dashboard</button>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>

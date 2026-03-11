@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Confirmation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fef6ec;
+            padding: 30px;
+        }
+        
+        nav {
+            background-color: #ae4102;
+        }
+        
+        .navbar .nav-link,
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 500;
+        }
+        
+        .navbar .nav-link:hover {
+            color: #ffe8dc !important;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .status-arc {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .status-step {
+            width: 100px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .status-step::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #ccc;
+            display: block;
+            margin: 0 auto 8px auto;
+        }
+        
+        .status-step.active::before {
+            background-color: #54b435;
+        }
+        
+        .status-line {
+            position: absolute;
+            top: 10px;
+            left: 50px;
+            width: calc(100% - 100px);
+            height: 4px;
+            background-color: #ccc;
+            z-index: 1;
+        }
+        
+        .status-line.active {
+            background-color: #54b435;
+        }
+        
+        .doctor-info p {
+            margin-bottom: 6px;
+        }
+        
+        button {
+            background-color: #54b435;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        button:hover {
+            background-color: #3d8e29;
+        }
+        
+        footer {
+            background-color: #ae4102;
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-semibold" href="{{ url_for('dashboard') }}">🐾 FurHelp Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h3 class="mb-4 text-center">Appointment Confirmation</h3>
+
+        <div class="doctor-info mb-4">
+            <h5>Dr. {{ doctor[0] }} {{ doctor[1] }}</h5>
+            <p>Phone: {{ doctor[2] }}</p>
+            <p>Address: {{ doctor[3] }}</p>
+        </div>
+
+        <div class="appointment-details mb-4">
+            <p><strong>Date:</strong> {{ date }}</p>
+            <p><strong>Time:</strong> {{ time }}</p>
+            {% if doctor[5] %}
+            <p><strong>Meeting Link:</strong> <a href="{{ doctor[5] }}" target="_blank">{{ doctor[5] }}</a></p>
+            {% endif %}
+        </div>
+
+        <!-- Status Arc -->
+        <div class="status-arc">
+            <div class="status-line {% if doctor[4] in ['approved','rejected'] %}active{% endif %}"></div>
+            <div class="status-step {% if doctor[4] in ['pending','approved','rejected'] %}active{% endif %}">Pending</div>
+            <div class="status-step {% if doctor[4] in ['approved','rejected'] %}active{% endif %}">Approved</div>
+            <div class="status-step {% if doctor[4] == 'rejected' %}active{% endif %}">Rejected</div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="text-center mt-4">
+            {% if doctor[4] == 'approved' and doctor[5] %}
+            <a href="{{ doctor[5] }}" target="_blank">
+                <button class="btn btn-success">Join Meeting</button>
+            </a>
+            {% endif %}
+
+            <a href="{{ url_for('dashboard') }}">
+                <button class="btn btn-outline-primary ms-2">Back to Dashboard</button>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 FurHelp. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
